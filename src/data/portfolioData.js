@@ -12,7 +12,7 @@ export const defaultData = {
     avatar: null,
   },
   contact: {
-    email: "divy@gmail.com",
+    email: "divy8011ansh@gmail.com",
     github: "https://github.com/divy-0508",
     linkedin: "https://www.linkedin.com/in/divyansh-bansal-/",
     kaggle: "https://www.kaggle.com/divyansh0508",

@@ -48,10 +48,25 @@ export default function ProjectDetail({ project, onBack }) {
     setMailLoading(false);
   }
 
+  // function getYTId(url) {
+  //   if (!url) return null;
+  //   const m = url.match(/(?:youtu\.be\/|v=)([^&?/]+)/);
+  //   return m ? m[1] : null;
+  // }
+
   function getYTId(url) {
     if (!url) return null;
-    const m = url.match(/(?:youtu\.be\/|v=)([^&?/]+)/);
-    return m ? m[1] : null;
+    const patterns = [
+      /(?:v=)([^&?/\s]+)/,
+      /(?:youtu\.be\/)([^&?/\s]+)/,
+      /(?:embed\/)([^&?/\s]+)/,
+      /(?:shorts\/)([^&?/\s]+)/,
+    ];
+    for (const p of patterns) {
+      const m = url.match(p);
+      if (m) return m[1];
+    }
+    return null;
   }
   const ytId = getYTId(project.video);
 

@@ -116,7 +116,7 @@ export default function EmotionWelcome({ onEnter }) {
 
         {phase === "intro" && (
           <>
-            <div style={{ fontSize: 52, marginBottom: 20, animation: "breathe 3s ease-in-out infinite" }}>🤖</div>
+            <div style={{ fontSize: 52, marginBottom: 20, animation: "breathe 3s ease-in-out infinite" }}>📷</div>
             <h2 style={{ fontSize: 28, fontWeight: 600, color: "#2C2C2C", marginBottom: 10, letterSpacing: "-0.02em" }}>
               Before you enter —
             </h2>

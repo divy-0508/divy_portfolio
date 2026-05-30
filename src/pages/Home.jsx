@@ -70,7 +70,7 @@ export default function Home({ onProjectClick, onAdminClick }) {
           DB<span style={{ color: "#5C8C5A" }}>.</span>
         </a>
         <div style={{ display: "flex", gap: 2, alignItems: "center" }}>
-          {[["#story","Story"],["#projects","Projects"],["#skills","Skills"],["#contact","Say Hello"]].map(([href, label]) => (
+          {[["#story", "Story"], ["#projects", "Projects"], ["#skills", "Skills"], ["#contact", "Say Hello"]].map(([href, label]) => (
             <a key={href} href={href} className="nav-link" style={{ fontFamily: "'DM Sans'", fontSize: 13, fontWeight: 500, color: "#7A6A55", padding: "8px 14px", borderRadius: 8, textDecoration: "none" }}>{label}</a>
           ))}
           <button onClick={onAdminClick} style={{ fontFamily: "'DM Sans'", fontSize: 12, color: "#A89070", background: "none", border: "1px solid #DDD0BC", borderRadius: 8, padding: "6px 12px", cursor: "pointer", marginLeft: 8 }}>⚙</button>
@@ -84,7 +84,7 @@ export default function Home({ onProjectClick, onAdminClick }) {
           <div style={{ position: "absolute", width: 500, height: 500, borderRadius: "50%", background: "radial-gradient(circle, rgba(92,140,90,0.08) 0%, transparent 70%)", top: "-100px", right: "-100px" }} />
           <div style={{ position: "absolute", width: 350, height: 350, borderRadius: "50%", background: "radial-gradient(circle, rgba(196,137,90,0.07) 0%, transparent 70%)", bottom: "5%", left: "-80px" }} />
           <svg style={{ position: "absolute", bottom: 0, left: 0, right: 0, opacity: 0.04 }} viewBox="0 0 1200 120" preserveAspectRatio="none" height="120">
-            <path d="M0,60 C200,100 400,20 600,60 C800,100 1000,20 1200,60 L1200,120 L0,120 Z" fill="#5C8C5A"/>
+            <path d="M0,60 C200,100 400,20 600,60 C800,100 1000,20 1200,60 L1200,120 L0,120 Z" fill="#5C8C5A" />
           </svg>
         </div>
 
@@ -96,7 +96,7 @@ export default function Home({ onProjectClick, onAdminClick }) {
             </span>
           </div>
 
-          <h1 className="hero-name" style={{ fontSize: 68, fontWeight: 700, lineHeight: 1.06, letterSpacing: "-0.03em", color: "#1A1510", marginBottom: 8 }}>
+          {/* <h1 className="hero-name" style={{ fontSize: 68, fontWeight: 700, lineHeight: 1.06, letterSpacing: "-0.03em", color: "#1A1510", marginBottom: 8 }}>
             Divyansh
           </h1>
           <h1 className="hero-name" style={{ fontSize: 68, fontWeight: 400, fontStyle: "italic", lineHeight: 1.06, letterSpacing: "-0.03em", color: "#8B6F47", marginBottom: 32 }}>
@@ -105,7 +105,31 @@ export default function Home({ onProjectClick, onAdminClick }) {
 
           <p style={{ fontFamily: "'DM Sans'", fontSize: 18, fontWeight: 300, color: "#6B5A42", lineHeight: 1.75, maxWidth: 520, marginBottom: 48 }}>
             {personal.bio}
-          </p>
+          </p> */}
+
+          <div style={{ display: "flex", alignItems: "flex-start", gap: 40, flexWrap: "wrap" }}>
+            <div style={{ flex: 1, minWidth: 280 }}>
+              <h1 className="hero-name" style={{ fontSize: 68, fontWeight: 700, lineHeight: 1.06, letterSpacing: "-0.03em", color: "#1A1510", marginBottom: 8 }}>
+                Divyansh
+              </h1>
+              <h1 className="hero-name" style={{ fontSize: 68, fontWeight: 400, fontStyle: "italic", lineHeight: 1.06, letterSpacing: "-0.03em", color: "#8B6F47", marginBottom: 32 }}>
+                Bansal.
+              </h1>
+              <p style={{ fontFamily: "'DM Sans'", fontSize: 18, fontWeight: 300, color: "#6B5A42", lineHeight: 1.75, maxWidth: 520, marginBottom: 48 }}>
+                {personal.bio}
+              </p>
+            </div>
+
+            {/* Avatar */}
+            <div style={{ flexShrink: 0, width: 220, height: 260, borderRadius: 24, overflow: "hidden", border: "2px solid #E0D5C5", background: "#EDE6DA", boxShadow: "0 8px 32px rgba(139,111,71,0.12)", marginTop: 8 }}>
+              <img
+                src="/divy.jpeg"
+                alt="Divyansh Bansal"
+                style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top" }}
+                onError={e => { e.target.style.display = "none"; }}
+              />
+            </div>
+          </div>
 
           <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center", marginBottom: 72 }}>
             <a href="#projects" style={{ fontFamily: "'DM Sans'", background: "#2C2415", color: "#F7F4EE", padding: "13px 30px", borderRadius: 40, fontSize: 14, fontWeight: 500, textDecoration: "none", letterSpacing: "0.01em", transition: "all 0.25s" }}
@@ -206,6 +230,25 @@ export default function Home({ onProjectClick, onAdminClick }) {
                   onMouseLeave={() => setHoveredProj(null)}
                   style={{ background: hoveredProj === p.id ? "#fff" : "#FAF7F2", border: `1px solid ${hoveredProj === p.id ? "#C4A882" : "#E8DFD0"}`, borderRadius: 16, padding: "22px 22px 18px", cursor: "pointer", position: "relative", boxShadow: hoveredProj === p.id ? "0 8px 32px rgba(139,111,71,0.12)" : "none" }}>
                   {p.highlight && <span style={{ position: "absolute", top: 16, right: 16, fontFamily: "'DM Sans'", fontSize: 10, color: "#C4895A", background: "rgba(196,137,90,0.1)", border: "1px solid rgba(196,137,90,0.25)", padding: "2px 9px", borderRadius: 20, letterSpacing: "0.06em", textTransform: "uppercase" }}>Featured</span>}
+                  {(() => {
+                    const m = p.video?.match(/(?:youtu\.be\/|v=)([^&?/]+)/);
+                    const ytId = m ? m[1] : null;
+                    return ytId ? (
+                      <div style={{ width: "100%", height: 130, borderRadius: 10, overflow: "hidden", marginBottom: 14, background: "#EDE6DA", position: "relative" }}>
+                        <img
+                          src={`https://img.youtube.com/vi/${ytId}/mqdefault.jpg`}
+                          alt={p.name}
+                          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                        />
+                        <div style={{ position: "absolute", inset: 0, background: "rgba(44,36,21,0.18)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                          <div style={{ width: 36, height: 36, borderRadius: "50%", background: "rgba(247,244,238,0.92)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                            <span style={{ fontSize: 12, marginLeft: 2 }}>▶</span>
+                          </div>
+                        </div>
+                      </div>
+                    ) : null;
+                  })()}
+
                   <span style={{ fontFamily: "'DM Sans'", fontSize: 10, color: "#A89070", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: 10, display: "block" }}>{p.category}</span>
                   <h3 style={{ fontFamily: "'Lora'", fontSize: 17, fontWeight: 600, color: "#1A1510", marginBottom: 8, lineHeight: 1.35, paddingRight: p.highlight ? 60 : 0 }}>{p.name}</h3>
                   <p style={{ fontFamily: "'DM Sans'", fontSize: 13, color: "#8B7355", lineHeight: 1.65, marginBottom: 18, fontWeight: 300 }}>{p.tagline}</p>
@@ -260,7 +303,8 @@ export default function Home({ onProjectClick, onAdminClick }) {
           <Reveal delay={0.1}><ContactForm /></Reveal>
           <Reveal delay={0.15}>
             <div style={{ display: "flex", gap: 10, flexWrap: "wrap", marginTop: 36, paddingTop: 36, borderTop: "1px solid #DDD0BC" }}>
-              {contact.email && <CLink href={`mailto:${contact.email}`} label="Email" />}
+              {/* {contact.email && <CLink href={`mailto:${contact.email}`} label="Email" />} */}
+              {contact.email && <CLink href={`https://mail.google.com/mail/?view=cm&to=${contact.email}&su=Hello Divyansh`} label="Email" />}
               {contact.github && <CLink href={contact.github} label="GitHub" />}
               {contact.linkedin && <CLink href={contact.linkedin} label="LinkedIn" />}
               {contact.kaggle && <CLink href={contact.kaggle} label="Kaggle" />}
@@ -276,36 +320,32 @@ export default function Home({ onProjectClick, onAdminClick }) {
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 32, marginBottom: 36 }}>
             <div>
               <div style={{ fontFamily: "'Lora'", fontWeight: 700, fontSize: 22, color: "#F7F4EE", marginBottom: 8, letterSpacing: "-0.01em" }}>
-                DB<span style={{ color: "#5C8C5A" }}>.</span>
+                Divyansh Bansal<span style={{ color: "#5C8C5A" }}>.</span>
               </div>
               <p style={{ fontFamily: "'DM Sans'", fontSize: 13, fontWeight: 300, lineHeight: 1.7, maxWidth: 280, color: "#7A6A55" }}>
-                Portfolio of Divyansh Bansal — CS student, AI/ML explorer, IMS Engineering College.
+                Building, learning, and growing—this portfolio reflects my journey through projects and real-world experiences.
               </p>
             </div>
             <div>
               <p style={{ fontFamily: "'DM Sans'", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "#5A4E3C", marginBottom: 14 }}>Credits</p>
-              <div style={{ fontFamily: "'DM Sans'", fontSize: 13, color: "#7A6A55", lineHeight: 2 }}>
-                <div>
-                  <span style={{ color: "#C4A882" }}>Content & vision</span>
-                  {" — "}Divyansh Bansal
-                </div>
+              <div style={{ fontFamily: "'DM Sans'", fontSize: 13, color: "#7A6A55", lineHeight: 2,maxWidth: 280 }}>
                 <div>
                   <span style={{ color: "#C4A882" }}>Design & development</span>
-                  {" — "}Claude (Anthropic) · Sonnet 4
+                  {" — "}Claude Sonnet 4
                 </div>
                 <div>
-                  <span style={{ color: "#C4A882" }}>Expression detection</span>
-                  {" — "}face-api.js by @justadudewhohacks
+                  <span style={{ color: "#C4A882" }}>Face Detection, Next Word Predictor, Summary Generator</span>
+                  {" — "}Divyansh Bansal
                 </div>
               </div>
             </div>
           </div>
           <div style={{ borderTop: "1px solid #3D3425", paddingTop: 24, display: "flex", justifyContent: "space-between", alignItems: "center", flexWrap: "wrap", gap: 12 }}>
             <p style={{ fontFamily: "'DM Sans'", fontSize: 12, color: "#5A4E3C" }}>
-              © {new Date().getFullYear()} Divyansh Bansal. Built with React + Vite.
+              © {new Date().getFullYear()} Divyansh Bansal. Built with React.
             </p>
             <p style={{ fontFamily: "'DM Sans'", fontSize: 12, color: "#5A4E3C", fontStyle: "italic" }}>
-              Designed & developed by Claude Sonnet 4 · Anthropic
+              Designed & developed with coffee & Google searches
             </p>
           </div>
         </div>
@@ -314,14 +354,6 @@ export default function Home({ onProjectClick, onAdminClick }) {
   );
 }
 
-function CLink({ href, label }) {
-  return (
-    <a href={href} target="_blank" rel="noopener noreferrer" className="contact-link"
-      style={{ fontFamily: "'DM Sans'", fontSize: 13, fontWeight: 500, padding: "11px 22px", borderRadius: 40, border: "1px solid #DDD0BC", color: "#6B5A42", textDecoration: "none", background: "#FAF7F2" }}>
-      {label}
-    </a>
-  );
-}
 
 function ContactForm() {
   const [name, setName] = useState("");
@@ -376,5 +408,21 @@ function ContactForm() {
         </div>
       )}
     </div>
+  );
+}
+function CLink({ href, label }) {
+  if (href?.startsWith("mailto:")) {
+    return (
+      <a href={href} className="contact-link"
+        style={{ fontFamily: "'DM Sans'", fontSize: 13, fontWeight: 500, padding: "11px 22px", borderRadius: 40, border: "1px solid #DDD0BC", color: "#6B5A42", textDecoration: "none", background: "#FAF7F2" }}>
+        {label}
+      </a>
+    );
+  }
+  return (
+    <a href={href} target="_blank" rel="noopener noreferrer" className="contact-link"
+      style={{ fontFamily: "'DM Sans'", fontSize: 13, fontWeight: 500, padding: "11px 22px", borderRadius: 40, border: "1px solid #DDD0BC", color: "#6B5A42", textDecoration: "none", background: "#FAF7F2" }}>
+      {label}
+    </a>
   );
 }

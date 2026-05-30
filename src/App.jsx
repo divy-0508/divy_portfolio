@@ -1,5 +1,8 @@
 import { useState } from "react";
 import { DataProvider } from "./hooks/useData";
+
+import CursorTracker from "./components/CursorTracker";
+
 import EmotionWelcome from "./components/EmotionWelcome";
 import Home from "./pages/Home";
 import ProjectDetail from "./pages/ProjectDetail";
@@ -17,6 +20,7 @@ export default function App() {
 
   return (
     <DataProvider>
+      <CursorTracker />
       {screen === "welcome" && (
         <EmotionWelcome onEnter={() => setScreen("home")} />
       )}

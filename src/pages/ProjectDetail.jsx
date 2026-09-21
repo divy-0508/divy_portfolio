@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useData } from "../hooks/useData";
+import WordPredictor from "../components/WordPredictor";
 
 export default function ProjectDetail({ project, onBack }) {
   const { data } = useData();
@@ -149,6 +150,7 @@ export default function ProjectDetail({ project, onBack }) {
               style={{ fontFamily: "'DM Sans'", display: "inline-flex", alignItems: "center", gap: 8, background: "#FAF7F2", border: "1px solid #DDD0BC", color: "#5C8C5A", padding: "11px 22px", borderRadius: 40, fontSize: 13, fontWeight: 500, cursor: "pointer" }}>
               ✦ Generate AI Summary →
             </button>
+            {project.id === "p5" && <WordPredictor />}
           </div>
         )}
 

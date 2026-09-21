@@ -108,7 +108,7 @@ function ContactEd({ data, onSave, iS, lS, btnP }) {
     <Sec title="Contact Links">
       {["email","github","linkedin","kaggle","resume"].map(k => (
         <F key={k} label={k.charAt(0).toUpperCase()+k.slice(1)} lS={lS}>
-          <input value={f[k]||""} onChange={e => setF(p => ({ ...p, [k]: e.target.value }))} style={iS} placeholder={k === "email" ? "you@email.com" : "https://..."} />
+          <input value={f[k]||""} onChange={e => setF(p => ({ ...p, [k]: e.target.value }))} style={iS} placeholder={k === "email" ? "divy8011ansh@gmail.com" : "https://..."} />
         </F>
       ))}
       <Save onClick={() => onSave(f)} btnP={btnP} />

@@ -6,7 +6,7 @@ export const defaultData = {
     tagline: "I build things that learn.",
     role: "CS Engineering Student · AI/ML Explorer",
     college: "IMS Engineering College",
-    year: "3rd Year · Computer Science & Engineering",
+    year: "4th Year · Computer Science & Engineering",
     city: "India",
     bio: "Started with a statistics textbook in early 2025. Built models, broke things, stayed up too many nights, competed in hackathons, got stuck more times than I can count — and crossed every step anyway.",
     avatar: null,

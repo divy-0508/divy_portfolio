@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useData } from "../hooks/useData";
+import { useWordPredict } from "../hooks/useWordPredict";
 
 const MOOD_ACCENT = {
   curious: "#5C8C5A", electric: "#C4895A", mindblown: "#8B6F47",
@@ -92,7 +93,7 @@ export default function Home({ onProjectClick, onAdminClick }) {
           <div style={{ display: "inline-flex", alignItems: "center", gap: 8, marginBottom: 36 }}>
             <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#5C8C5A", display: "inline-block", animation: "floatGently 2.5s ease-in-out infinite" }} />
             <span style={{ fontFamily: "'DM Sans'", fontSize: 12, color: "#8B7355", letterSpacing: "0.1em", textTransform: "uppercase", fontWeight: 500 }}>
-              3rd Year · IMS Engineering College · Open to opportunities
+              4th Year · IMS Engineering College · Open to opportunities
             </span>
           </div>
 
@@ -328,7 +329,7 @@ export default function Home({ onProjectClick, onAdminClick }) {
             </div>
             <div>
               <p style={{ fontFamily: "'DM Sans'", fontSize: 11, letterSpacing: "0.1em", textTransform: "uppercase", color: "#5A4E3C", marginBottom: 14 }}>Credits</p>
-              <div style={{ fontFamily: "'DM Sans'", fontSize: 13, color: "#7A6A55", lineHeight: 2,maxWidth: 280 }}>
+              <div style={{ fontFamily: "'DM Sans'", fontSize: 13, color: "#7A6A55", lineHeight: 2, maxWidth: 280 }}>
                 <div>
                   <span style={{ color: "#C4A882" }}>Design & development</span>
                   {" — "}Claude Sonnet 4
@@ -360,6 +361,7 @@ function ContactForm() {
   const [msg, setMsg] = useState("");
   const [draft, setDraft] = useState("");
   const [loading, setLoading] = useState(false);
+  const { suggestion, onType, acceptSuggestion } = useWordPredict();
   const { data } = useData();
 
   const iStyle = { width: "100%", background: "#FAF7F2", border: "1px solid #DDD0BC", borderRadius: 10, padding: "13px 16px", color: "#2C2415", fontFamily: "'DM Sans'", fontSize: 14, outline: "none", transition: "border 0.2s", fontWeight: 300 };
@@ -389,9 +391,26 @@ function ContactForm() {
       <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
         <input value={name} onChange={e => setName(e.target.value)} placeholder="Your name" style={iStyle}
           onFocus={e => e.target.style.borderColor = "#5C8C5A"} onBlur={e => e.target.style.borderColor = "#DDD0BC"} />
-        <textarea value={msg} onChange={e => setMsg(e.target.value)} placeholder="What's on your mind?" rows={4}
+        {/* <textarea value={msg} onChange={e => setMsg(e.target.value)} placeholder="What's on your mind?" rows={4}
           style={{ ...iStyle, resize: "vertical", lineHeight: 1.7 }}
-          onFocus={e => e.target.style.borderColor = "#5C8C5A"} onBlur={e => e.target.style.borderColor = "#DDD0BC"} />
+          onFocus={e => e.target.style.borderColor = "#5C8C5A"} onBlur={e => e.target.style.borderColor = "#DDD0BC"} /> */}
+        <div style={{ position: "relative" }}>
+          <textarea
+            value={msg}
+            onChange={e => onType(e.target.value, setMsg)}
+            onKeyDown={e => { if (e.key === "Tab") { e.preventDefault(); acceptSuggestion(msg, setMsg); } }}
+            placeholder="What's on your mind?"
+            rows={4}
+            style={{ ...iStyle, resize: "vertical", lineHeight: 1.7 }}
+            onFocus={e => e.target.style.borderColor = "#5C8C5A"}
+            onBlur={e => e.target.style.borderColor = "#DDD0BC"}
+          />
+          {suggestion && (
+            <div style={{ position: "absolute", bottom: 10, right: 12, fontFamily: "'DM Sans'", fontSize: 12, color: "#B0A090", background: "#F7F4EE", padding: "3px 10px", borderRadius: 20, border: "1px solid #E0D5C5", pointerEvents: "none" }}>
+              Tab → <strong>{suggestion}</strong>
+            </div>
+          )}
+        </div>
         <button onClick={gen} disabled={loading || !msg.trim()}
           style={{ alignSelf: "flex-start", fontFamily: "'DM Sans'", background: loading ? "#A89070" : "#2C2415", color: "#F7F4EE", border: "none", padding: "12px 26px", borderRadius: 40, fontSize: 13, fontWeight: 500, cursor: loading ? "wait" : "pointer", transition: "background 0.2s" }}>
           {loading ? "Drafting…" : "✦ Draft AI Reply"}
